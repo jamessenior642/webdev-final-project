@@ -5,16 +5,25 @@ import { Routes, Route } from "react-router";
 import Marketplace from "./marketplace";
 import Home from "./marketplace/home";
 import Login from "./marketplace/login";
-import SignUp from "./marketplace/login/signup";
+import SignUp from "./marketplace/signup";
 import Search from "./marketplace/search";
 import Profile from "./marketplace/profile";
+import { ProfileProvider } from "./context/profile-context";
+import SecureRoute from "./marketplace/secure-route";
 
 
 function App() {
   return (
+    <ProfileProvider>
     <BrowserRouter>
     <div className="container">
       <Routes>
+      <Route path="profile"
+      element={
+         <SecureRoute>
+          <Profile />
+          </SecureRoute>
+          }/>
         <Route path="/*" element={<Marketplace/>} />
         <Route path="/home" element={<Home/>} />
         <Route path="/login" element={<Login/>} />
@@ -25,6 +34,7 @@ function App() {
       </Routes>
       </div>
     </BrowserRouter>
+    </ProfileProvider>
 
   );
 }
