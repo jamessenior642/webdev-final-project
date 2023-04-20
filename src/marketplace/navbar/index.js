@@ -18,10 +18,7 @@ const NavBar = () => {
                 </LinkContainer>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                
                     <Nav className="mr-auto">
-
-
                         <LinkContainer to="/recommendation">
                             <Nav.Link>Recommendation</Nav.Link>
                         </LinkContainer>
