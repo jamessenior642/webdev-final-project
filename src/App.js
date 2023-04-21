@@ -3,7 +3,6 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 
 import NavBar from "./marketplace/navbar";
-import Marketplace from "./marketplace";
 import Home from "./marketplace/home";
 import Login from "./marketplace/login";
 import SignUp from "./marketplace/signup";
