@@ -46,7 +46,7 @@ const Login = () => {
       </div> 
     {err && (
             <div className="alert alert-danger alert-dismissible" role="alert">
-                Please fill out all fields!
+                Please make sure you have a valid login!
             </div>
         )}
         <button className="btn btn-primary" onClick={loginSubmit}>

@@ -24,7 +24,7 @@ const SignUp = () => {
             passwordRef.current.value
             )
             .then(() => navigate("/"))
-            .catch((e) => setError(true));
+            .catch((e) => console.log(e) && setError(true));
         } else {
         setError(true);
         }
