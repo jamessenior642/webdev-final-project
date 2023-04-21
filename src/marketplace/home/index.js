@@ -22,11 +22,12 @@ const Home = () => {
             
             <ul className="list-group">
                 {products.map((products) =>
-                <li className="list-group-item">
+                <li className="list-group-item col-5">
                     <h3>{products.title}</h3>
                     <img src={products.image} alt="product image" width="100" height="100"/>
                     <p>{products.description}</p>
                     <p> ${products.price}</p>
+                    <button className="btn btn-primary">Sign in to add review</button>
 
                     </li>
                 )}
