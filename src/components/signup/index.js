@@ -8,6 +8,8 @@ const SignUp = () => {
     const passwordRef = useRef();
     const navigate = useNavigate();
     const [err, setError] = useState(false);
+    const [userType, setUserType] = useState('Buyer');
+    {/*Need to implement button for signup */}
     
     const signup = () => {
         if (
@@ -30,9 +32,15 @@ const SignUp = () => {
         }
     };
 
+
+
     return (
         <div>
         <h1>SignUp</h1>
+        <div>
+        <button onClick={() => setUserType('Buyer')}>Buyer</button>
+        <button onClick={() => setUserType('Seller')}>Seller</button>
+        </div>
         Email
             <input 
         type="email" 

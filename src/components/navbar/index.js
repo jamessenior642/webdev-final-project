@@ -19,17 +19,14 @@ const NavBar = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                        <LinkContainer to="/recommendation">
-                            <Nav.Link>Recommendation</Nav.Link>
-                        </LinkContainer>
-                        <LinkContainer to="/store">
-                            <Nav.Link>Store</Nav.Link>
-                        </LinkContainer>
-                        <LinkContainer to="/logout">
-                            <Nav.Link>Logout</Nav.Link>
+                        <LinkContainer to="/login">
+                            <Nav.Link>Login</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/signup">
                             <Nav.Link>Signup</Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="/logout">
+                            <Nav.Link>Logout</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/cart">
                             <Nav.Link>Cart</Nav.Link>
@@ -37,20 +34,16 @@ const NavBar = () => {
                         <LinkContainer to="/profile">
                             <Nav.Link>Profile</Nav.Link>
                         </LinkContainer>
-                        <LinkContainer to="/login">
-                            <Nav.Link>Login</Nav.Link>
+                        <LinkContainer to="/search">
+                            <Nav.Link>Search</Nav.Link>
                         </LinkContainer>
                     </Nav>
-                    <Form inline onSubmit={handleSearch} >
-                        <Form.Control type="text" placeholder="Search" className="" />
+                    <Form className="d-flex" onSubmit={handleSearch} >
+                        <Form.Control type="text" placeholder="Search products" className="" />
                         <Button variant="outline-success" type="submit">Search</Button>
                         </Form>
                 </Navbar.Collapse>
             </Navbar>
-            
-         
-
-
         </div>
     )
 }
