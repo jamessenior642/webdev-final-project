@@ -32,6 +32,7 @@ function App() {
         <Route path="/search" element={<Search/>} />
         <Route path="/profile" element={<Profile/>} />
         <Route path="/details" element={<Details/>} />
+        <Route path="/details/:id" element={<Details/>} />
       </Routes>
       </div>
     </BrowserRouter>
