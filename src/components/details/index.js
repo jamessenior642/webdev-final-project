@@ -7,11 +7,12 @@ const Details = () => {
 
     const [product, setProducts] = useState([]);
     const [ourProduct, setOurProduct] = useState({});
-    const { productID } = useParams();
+    const { id } = useParams();
+
+    console.log(id); 
 
     const fetchProductByID = async () => {
-        const response = await productService.getProductById(productID);
-        console.log(response);
+        const response = await productService.getProductById(id);
         setProducts(response.data);
     };
 
