@@ -9,6 +9,7 @@ const SignUp = () => {
     const navigate = useNavigate();
     const [err, setError] = useState(false);
     const [userType, setUserType] = useState('Buyer');
+
     {/*Need to implement button for signup */}
     
     const signup = () => {
@@ -17,13 +18,15 @@ const SignUp = () => {
             emailRef.current.value === "" ||
             usernameRef.current.value === "" ||
             passwordRef.current.value === ""
+            
         )
         ) {
         service
             .signup(
             emailRef.current.value,
             usernameRef.current.value,
-            passwordRef.current.value
+            passwordRef.current.value,
+            userType
             )
             .then(() => navigate("/"))
             .catch((e) => console.log(e) && setError(true));
@@ -35,12 +38,16 @@ const SignUp = () => {
 
 
     return (
-        <div>
+        <div className="row">
         <h1>SignUp</h1>
-        <div>
-        <button onClick={() => setUserType('Buyer')}>Buyer</button>
-        <button onClick={() => setUserType('Seller')}>Seller</button>
+        <div class="btn-group" role="group">
+        <input onClick={() => setUserType('Buyer')} type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked={true}/>
+        <label class="btn btn-outline-primary" for="btnradio1">Buyer</label>
+
+        <input onClick={() => setUserType('Seller')} type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off"/>
+        <label class="btn btn-outline-primary" for="btnradio2">Seller</label>
         </div>
+
         Email
             <input 
         type="email" 
