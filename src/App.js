@@ -9,6 +9,7 @@ import SignUp from "./components/signup";
 import Search from "./components/search";
 import Profile from "./components/profile";
 import Details from "./components/details";
+import Logout from "./components/logout";
 import { ProfileProvider } from "./context/profile-context";
 import SecureRoute from "./components/secure-route";
 
@@ -28,6 +29,7 @@ function App() {
           }/>
         <Route path="/*" element={<Home/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/logout" element={<Logout/>} />
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/search" element={<Search/>} />
         <Route path="/profile" element={<Profile/>} />

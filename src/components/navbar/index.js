@@ -20,31 +20,39 @@ const NavBar = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
+                        <SecureContent
+                        nonloggedincontent={
                         <LinkContainer to="/login">
                             <Nav.Link>Login</Nav.Link>
                         </LinkContainer>
+                        } loggedincontent= {
+                            <LinkContainer to="/logout">
+                                <Nav.Link>Logout</Nav.Link>
+                            </LinkContainer>
+                            }
+                        />
+                        
+                        <SecureContent
+                        loggedincontent={
+                            <LinkContainer to="/profile">
+                                <Nav.Link>Profile</Nav.Link>
+                            </LinkContainer>
+                        } nonloggedincontent={
                         <LinkContainer to="/signup">
                             <Nav.Link>Signup</Nav.Link>
                         </LinkContainer>
-                        <LinkContainer to="/logout">
-                            <Nav.Link>Logout</Nav.Link>
+                        }
+                       />
+                       <LinkContainer to="/details">
+                            <Nav.Link>Details</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/cart">
                             <Nav.Link>Cart</Nav.Link>
                         </LinkContainer>
-                        <SecureContent
-                        loggedInContent={
-                            <LinkContainer to="/profile">
-                                <Nav.Link>Profile</Nav.Link>
-                            </LinkContainer>
-                        }
-                       />
                         <LinkContainer to="/search">
                             <Nav.Link>Search</Nav.Link>
                         </LinkContainer>
-                        <LinkContainer to="/details">
-                            <Nav.Link>Details</Nav.Link>
-                        </LinkContainer>
+
                     </Nav>
                     <Form className="d-flex" onSubmit={handleSearch} >
                         <Form.Control type="text" placeholder="Search products" className="" />

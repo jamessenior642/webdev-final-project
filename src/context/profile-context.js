@@ -10,7 +10,19 @@ export const ProfileProvider = ({ children }) => {
     try {
       const p = await service.login(email, password);
       setProfile(p);
-    } catch (e) {}
+    } catch (e) {
+      throw e;
+
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await service.logout();
+      setProfile(null);
+    } catch (e) {
+      throw e;
+    }
   };
 
   const checkLoggedIn = async () => {
@@ -32,7 +44,7 @@ export const ProfileProvider = ({ children }) => {
     }
   };
 
-  const value = { profile, signup, checkLoggedIn, login };
+  const value = { profile, signup, checkLoggedIn, login, logout };
   return (
     <ProfileContext.Provider value={value}>{children}</ProfileContext.Provider>
   );

@@ -19,6 +19,7 @@ const Login = () => {
             try {
                 await login(emailRef.current.value, passwordRef.current.value);
                 navigate("/");
+                navigate(0)
             } catch (e) {
                 setError(true);
             }

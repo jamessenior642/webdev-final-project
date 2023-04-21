@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useProfile } from "./profile-context";
 
-const SecureContent = ({ loggedInContent, nonloggedInContent }) => {
+const SecureContent = ({ loggedincontent, nonloggedincontent }) => {
   const { checkLoggedIn } = useProfile();
   const [loggedIn, setLoggedIn] = useState(false);
   const check = async () => {
@@ -9,16 +9,17 @@ const SecureContent = ({ loggedInContent, nonloggedInContent }) => {
       await checkLoggedIn();
       setLoggedIn(true);
     } catch (e) {
-      console.log(e);
+      console.log(e)
+      setLoggedIn(false);
     }
   };
   useEffect(() => {
     check();
   }, []);
   if (loggedIn) {
-    return loggedInContent;
+    return loggedincontent;
   }
-  return nonloggedInContent;
+  return nonloggedincontent;
 };
 
 export default SecureContent;
