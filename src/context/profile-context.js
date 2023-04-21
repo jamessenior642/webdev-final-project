@@ -10,9 +10,7 @@ export const ProfileProvider = ({ children }) => {
     try {
       const p = await service.login(email, password);
       setProfile(p);
-    } catch (e) {
-      throw e;
-    }
+    } catch (e) {}
   };
 
   const checkLoggedIn = async () => {

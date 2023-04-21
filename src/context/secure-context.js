@@ -9,7 +9,7 @@ const SecureContent = ({ loggedInContent, nonloggedInContent }) => {
       await checkLoggedIn();
       setLoggedIn(true);
     } catch (e) {
-      console.log("haw");
+      console.log(e);
     }
   };
   useEffect(() => {

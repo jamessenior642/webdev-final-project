@@ -3,6 +3,7 @@ import React from "react";
 import {Navbar, Nav} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import {Form, Button} from 'react-bootstrap'
+import SecureContent from "../../context/secure-context.js"
 
 const NavBar = () => {
     //TO-DO 
@@ -31,9 +32,13 @@ const NavBar = () => {
                         <LinkContainer to="/cart">
                             <Nav.Link>Cart</Nav.Link>
                         </LinkContainer>
-                        <LinkContainer to="/profile">
-                            <Nav.Link>Profile</Nav.Link>
-                        </LinkContainer>
+                        <SecureContent
+                        loggedInContent={
+                            <LinkContainer to="/profile">
+                                <Nav.Link>Profile</Nav.Link>
+                            </LinkContainer>
+                        }
+                       />
                         <LinkContainer to="/search">
                             <Nav.Link>Search</Nav.Link>
                         </LinkContainer>
