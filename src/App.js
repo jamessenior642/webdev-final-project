@@ -18,7 +18,7 @@ function App() {
     <BrowserRouter>
     <div className="container">
       <Routes>
-      <Route path="profile"
+      <Route path="/profile"
       element={
          <SecureRoute>
           <Profile />
