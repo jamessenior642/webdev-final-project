@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 
+import NavBar from "./marketplace/navbar";
 import Marketplace from "./marketplace";
 import Home from "./marketplace/home";
 import Login from "./marketplace/login";
@@ -17,6 +18,7 @@ function App() {
     <ProfileProvider>
     <BrowserRouter>
     <div className="container">
+    <NavBar/>
       <Routes>
       <Route path="/profile"
       element={
@@ -24,8 +26,7 @@ function App() {
           <Profile />
           </SecureRoute>
           }/>
-        <Route path="/*" element={<Marketplace/>} />
-        <Route path="/home" element={<Home/>} />
+        <Route path="/*" element={<Home/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/search" element={<Search/>} />
