@@ -1,41 +1,50 @@
-import React, { useEffect, useState } from 'react';
-import { getProducts } from '../../services/product-service';
-import { Link } from 'react-router-dom';
-
+import React, { useEffect, useState } from "react";
+import { getProducts } from "../../services/product-service";
+import { Link } from "react-router-dom";
 
 const Home = () => {
+  const [products, setProducts] = useState([]);
+  const productList = async () => {
+    const response = await getProducts();
+    setProducts(response.data);
+  };
 
-    const [products, setProducts] = useState([]);
-    const productList  = async () => {
-        const response = await getProducts();
-        setProducts(response.data);
-    }        
+  useEffect(() => {
+    productList();
+  }, []);
 
-    useEffect(() => {
-        productList();
-    }, [])
-
-    //list all products
-    return (
-        <div>
-            <h1>Home</h1>
-            <ul className="list-group">
-                {products.map((products) =>
-                <li className="list-group-item col-5">
-                    <Link to={`/details/${products.id}`}><h3>{products.title}</h3></Link>
-                    <img src={products.image} alt="product image" width="100" height="100"/>
-                    <p>{products.description}</p>
-                    <p> ${products.price}</p>
-                    <button className="btn btn-primary">Sign in to add review</button>
-
-                    </li>
-                )}
-               
-            </ul> 
-
-            
-        </div>
-    )
-}
+  return (
+    <div className="container"> 
+      <h1 className="text-center my-4">Home</h1>
+      <div className="row"> 
+        {products.map((product) => (
+          <div className="col-md-4 mb-4" key={product.id}>
+            <div className="card h-100"> 
+              <img
+                src={product.image}
+                alt="product"
+                className="card-img-top"
+                height="200"
+                style={{ objectFit: "cover" }}
+              />
+              <div className="card-body">
+                <Link to={`/details/${product.id}`}>
+                  <h3 className="card-title">{product.title}</h3>
+                </Link>
+                <p className="card-text">{product.description}</p>
+                <p className="card-text">${product.price}</p>
+              </div>
+              <div className="card-footer">
+                <button className="btn btn-primary btn-block">
+                  Sign in to add review
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default Home;

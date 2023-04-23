@@ -1,5 +1,5 @@
-import {useRef, useState} from "react";
-import {useNavigate, Link} from "react-router-dom";
+import { useRef, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import * as service from "../../services/auth-service";
 
 const SignUp = () => {
@@ -8,81 +8,115 @@ const SignUp = () => {
     const passwordRef = useRef();
     const navigate = useNavigate();
     const [err, setError] = useState(false);
-    const [userType, setUserType] = useState('Buyer');
+    const [userType, setUserType] = useState("Buyer");
 
-    {/*Need to implement button for signup */}
-    
     const signup = () => {
         if (
-        !(
-            emailRef.current.value === "" ||
-            usernameRef.current.value === "" ||
-            passwordRef.current.value === ""
-            
-        )
-        ) {
-        service
-            .signup(
-            emailRef.current.value,
-            usernameRef.current.value,
-            passwordRef.current.value,
-            userType
+            !(
+                emailRef.current.value === "" ||
+                usernameRef.current.value === "" ||
+                passwordRef.current.value === ""
             )
-            .then(() => navigate("/"))
-            .catch((e) => console.log(e) && setError(true));
+        ) {
+            service
+                .signup(
+                    emailRef.current.value,
+                    usernameRef.current.value,
+                    passwordRef.current.value,
+                    userType
+                )
+                .then(() => navigate("/"))
+                .catch((e) => console.log(e) && setError(true));
         } else {
-        setError(true);
+            setError(true);
         }
     };
 
-
-
     return (
-        <div className="row">
-        <h1>SignUp</h1>
-        <div class="btn-group" role="group">
-        <input onClick={() => setUserType('Buyer')} type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked={true}/>
-        <label class="btn btn-outline-primary" for="btnradio1">Buyer</label>
+        <div className="container"> 
+            <div className="row justify-content-center"> 
+                <div className="col-md-6"> 
+                    <div className="card">
+                        <div className="card-body">
+                            <h1 className="card-title text-center">Sign Up</h1>
+                            <form>
+                                <div className="form-group">
+                                    <label htmlFor="userType">User Type: </label>
+                                    <div className="btn-group" role="group">
+                                        <input
+                                            onClick={() => setUserType("Buyer")}
+                                            type="radio"
+                                            className="btn-check"
+                                            name="btnradio"
+                                            id="btnradio1"
+                                            autoComplete="off"
+                                            checked={true}
+                                        />
+                                        <label className="btn btn-outline-primary" htmlFor="btnradio1">
+                                            Buyer
+                                        </label>
 
-        <input onClick={() => setUserType('Seller')} type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off"/>
-        <label class="btn btn-outline-primary" for="btnradio2">Seller</label>
+                                        <input
+                                            onClick={() => setUserType("Seller")}
+                                            type="radio"
+                                            className="btn-check"
+                                            name="btnradio"
+                                            id="btnradio2"
+                                            autoComplete="off"
+                                        />
+                                        <label className="btn btn-outline-primary" htmlFor="btnradio2">
+                                            Seller
+                                        </label>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="email">Email</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        ref={emailRef}
+                                        placeholder="johndoe@webdev.com"
+                                        className="form-control"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="username">Username</label>
+                                    <input
+                                        type="text"
+                                        id="username"
+                                        ref={usernameRef}
+                                        placeholder="jdoe17"
+                                        className="form-control"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="password">Password</label>
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        ref={passwordRef}
+                                        placeholder="supersecretpassword"
+                                        className="form-control"
+                                    />
+                                </div>
+                                {err && (
+                                    <div className="alert alert-danger alert-dismissible" role="alert">
+                                        Please fill out all fields!
+                                    </div>
+                                )}
+                                <button type="button" className="btn btn-primary btn-block" onClick={signup}>
+                                    Sign Up
+                                </button>
+                            </form>
+                            <div className="text-center mt-3">
+                                <Link to="/login">Already have an account? Log in</Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        Email
-            <input 
-        type="email" 
-        ref={emailRef}
-        placeholder="johndoe@webdev.com"
-        className="form-control"
-        />
-        Username
-        <input
-        type="text"
-        ref={usernameRef}
-        placeholder="jdoe17"
-        className="form-control"
-      />
-      Password
-      <input
-        type="password"
-        ref={passwordRef}
-        placeholder="supersecretpassword"
-        className="form-control"
-      />
-        {err && (    
-        <div className="alert alert-danger alert-dismissible" role="alert">
-            Please fill out all fields!
-        </div>
-        )}
-        <button onClick={signup} className="btn btn-primary">
-            Sign Up
-        </button>
-        <br/>
-        <Link to="/login">Already have an account?</Link>
-
-        
-        </div>
-    )
-}
+    );
+};
 
 export default SignUp;
