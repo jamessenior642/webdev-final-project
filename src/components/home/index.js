@@ -34,11 +34,6 @@ const Home = () => {
                 <p className="card-text">{product.description}</p>
                 <p className="card-text">${product.price}</p>
               </div>
-              <div className="card-footer">
-                <button className="btn btn-primary btn-block">
-                  Sign in to add review
-                </button>
-              </div>
             </div>
           </div>
         ))}
