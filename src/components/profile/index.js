@@ -1,75 +1,93 @@
-import React from 'react';
+import React from "react";
 import * as service from "../../services/auth-service";
 import { useProfile } from "../../context/profile-context";
 import * as userService from "../../services/user-service";
 import { Link } from "react-router-dom";
 
-
 const Profile = () => {
-    const { profile } = useProfile();
-    const [user, setUser] = React.useState();
-    const [userName, setUserName] = React.useState();
-    const [email, setEmail] = React.useState();
-    const [password, setPassword] = React.useState();
-    const [err, setError] = React.useState(false);
+  const { profile } = useProfile();
+  const [userName, setUserName] = React.useState();
+  const [email, setEmail] = React.useState();
+  const [password, setPassword] = React.useState();
+  const [err, setError] = React.useState(false);
 
-    const checkUser = async () => {
-        const curUser = await userService.getUserByEmail(profile.email);
-        setUser(user)
-        setUserName(curUser.username);
-        setEmail(curUser.email);
-        setPassword(curUser.password);
-        setError(false);
-    }
+  const checkUser = async () => {
+    const user = await userService.getUserByEmail(profile.email);
+    console.log(user);
+    setUserName(user.userName);
+    setEmail(user.email);
+    setPassword(user.password);
+  };
 
-    React.useEffect(() => {
-        checkUser();
-    }, []);
+  React.useEffect(() => {
+    checkUser();
+  }, []);
 
-    const handleUpdate = async () => {
-        if (userName === "" || email === "" || password === "") {
-            setError(true);
-        } else {
-            await userService.updateUser(profile._id, userName, email, password, profile.role);
-            const user = await userService.getUserByEmail(email);
-            setUser(user.username);
-        }
-    }
-    return (
-        <div>
-            <h1>Profile</h1>
+  return (
+    <div className="container">
+      <h1 className="text-center my-4">Profile</h1>
+      <h2>Email: {profile.email}</h2>
+      <h2>Username: {profile.userName}</h2>
 
-            <div className="header">
-            <h2>Email: {profile.email}</h2>
-            <h2>Username: {profile.username}</h2>
-            </div> 
-
-            <div className="form-group">
-                <label htmlFor="username">Change Username </label>
-                <input type="text" className="form-control" id="username" placeholder={userName} onChange={(e) => setUserName(e.target.value)} />
-                <button className="btn btn-primary" onClick={() => { handleUpdate(); }}>
-                    Update Username
-                </button>
-                </div>
-
-                <div className="form-group mt-3">
-                <label htmlFor="email">Change Email </label>
-                <input type="text" className="form-control" id="email" placeholder={email} onChange={(e) => setEmail(e.target.value)} />
-                <button className="btn btn-primary" onClick={() => {
-                    window.location.reload();
-                }}>Update Email</button>
-                </div> 
-
-                <div className="form-group mt-3">
-                <label htmlFor="password">Change Password </label>
-                <input type="text" className="form-control" id="password" onChange={(e) => setPassword(e.target.value)} />
-                <button className="btn btn-primary" onClick={() => {
-                    window.location.reload();
-                }}>Update Password</button>
-                </div>
+      <div className="row">
+        <div className="col-md-6 offset-md-3">
+          <form>
+            <div className="form-group my-2">
+              <label htmlFor="username">Username</label>
+              <input
+                type="text"
+                className="form-control"
+                id="username"
+                placeholder="Enter username"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
+            </div>
+            <div className="form-group my-2">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group my-2">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <button
+              className="btn btn-primary"
+              onClick={async () => {
+                try {
+                  await userService.updateUser(profile._id, userName, email, password);
+                  setError(false);
+                } catch (e) {
+                  setError(true);
+                }
+              }}
+            >
+              Update
+            </button>
+          </form>
+          {err && (
+            <div className="alert alert-danger alert-dismissible mt-3" role="alert">
+              Please make sure you have a valid login!
+            </div>
+          )}
         </div>
-    );
+      </div>
+    </div>
+  );
 };
-
 
 export default Profile;
