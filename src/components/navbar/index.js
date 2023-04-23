@@ -58,8 +58,9 @@ const NavBar = () => {
                     placeholder="Search products"
                     className="me-2"
                     aria-label="Search"
+          
                   />
-                  <Button variant="outline-success" type="submit">Search</Button>
+                  <Button variant="outline-success" type="submit" href="/search">Search</Button>
                 </Form>
               </Navbar.Collapse>
          
