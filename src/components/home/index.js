@@ -28,7 +28,7 @@ const Home = () => {
                 style={{ objectFit: "cover" }}
               />
               <div className="card-body">
-                <Link to={`/details/${product.id}`}>
+                <Link className = "text-decoration-none" to={`/details/${product.id}`}>
                   <h3 className="card-title">{product.title}</h3>
                 </Link>
                 <p className="card-text">{product.description}</p>
