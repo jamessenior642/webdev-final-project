@@ -14,11 +14,13 @@ export const getUserByEmail = async (email) => {
 
 
 export const updateUser = async (id, username, email, password, role) => {
-    const response = await api.put(`${API_URL}/user/${id}`, {
-        username,
-        email,
-        password,
-        role
-    });
+    const newUser = {
+        _id : id,
+        username: username,
+        email: email,
+        password: password,
+        role: role
+        };
+    const response = await api.put(`${API_URL}/users/${id}`, newUser);
     return response.data;
-}
+    }
