@@ -19,7 +19,6 @@ const Home = () => {
     return (
         <div>
             <h1>Home</h1>
-            
             <ul className="list-group">
                 {products.map((products) =>
                 <li className="list-group-item col-5">

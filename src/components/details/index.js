@@ -2,31 +2,33 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams, NavLink, Link } from "react-router-dom";
 import * as productService from "../../services/product-service.js"
+import * as reviewService from "../../services/review-service.js"
 
 const Details = () => {
 
     const [product, setProducts] = useState([]);
-    const [ourProduct, setOurProduct] = useState({});
+    const [reviews, setReviews] = useState([]);
     const { id } = useParams();
 
-    console.log(id); 
+    console.log(id);
 
     const fetchProductByID = async () => {
         const response = await productService.getProductById(id);
         setProducts(response.data);
     };
 
-    // const fetchProductByIDfromDatabase = async () => {
-    //     const response = await productService.fetchMemeById(productID);
-    //     console.log(response.data);
-    //     setOurMeme(response.data);
-    // };
+    const findReviews = async () => {
+        const reviews = await reviewService.findReviewsByProductID(id);
+        setReviews(reviews);
+      };
 
     useEffect(() => {
         fetchProductByID();
-        // fetchProductByIDfromDatabase();
+        findReviews();
+
     }, [])
 
+    
     return (
         <div>
             <h1>Details</h1>
@@ -35,6 +37,18 @@ const Details = () => {
             <p>{product.description}</p>
             <p> ${product.price}</p>
             <button className="btn btn-primary">Sign in to add review</button>
+
+        {/* reviews*/}
+        <ul className="list-group pt-1 mb-4">
+        {reviews.map((review) => (
+          <li className="list-group-item">
+            <Link to={`/profile`} className="links">
+              {review && review.username}:
+            </Link>
+            <p>{review && review.comment}</p>
+          </li>
+        ))}{" "}
+      </ul>
 
         </div>
     )
