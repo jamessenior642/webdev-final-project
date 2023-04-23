@@ -32,7 +32,7 @@ const Profile = () => {
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <form>
-            <div className="form-group">
+            <div className="form-group my-2">
               <label htmlFor="username">Username</label>
               <input
                 type="text"
@@ -43,7 +43,7 @@ const Profile = () => {
                 onChange={(e) => setUserName(e.target.value)}
               />
             </div>
-            <div className="form-group">
+            <div className="form-group my-2">
               <label htmlFor="email">Email</label>
               <input
                 type="email"
@@ -54,7 +54,7 @@ const Profile = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="form-group">
+            <div className="form-group my-2">
               <label htmlFor="password">Password</label>
               <input
                 type="password"

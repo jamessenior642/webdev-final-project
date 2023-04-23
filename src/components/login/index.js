@@ -34,7 +34,7 @@ const Login = () => {
             <div className="card-body">
               <h1 className="card-title text-center">Login</h1>
               <form>
-                <div className="form-group">
+                <div className="form-group my-3">
                   <label htmlFor="email">Email</label>
                   <input
                     type="email"
@@ -44,7 +44,7 @@ const Login = () => {
                     className="form-control"
                   />
                 </div>
-                <div className="form-group">
+                <div className="form-group my-3">
                   <label htmlFor="password">Password</label>
                   <input
                     type="password"
