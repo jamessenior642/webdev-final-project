@@ -52,7 +52,7 @@ const NavBar = () => {
                              <Nav.Link>Search</Nav.Link>
                          </LinkContainer>
                 </Nav>
-                <Form className="d-flex">
+                <Form className="d-flex" onSubmit={handleSearch}>
                   <FormControl
                     type="search"
                     placeholder="Search products"
