@@ -60,7 +60,7 @@ const NavBar = () => {
                     aria-label="Search"
           
                   />
-                  <Button variant="outline-success" type="submit" href="/search">Search</Button>
+                  <Button variant="outline-primary" type="submit" href="/search">Search</Button>
                 </Form>
               </Navbar.Collapse>
          
