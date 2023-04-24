@@ -1,17 +1,37 @@
 // create a navbar header  component
-import React from "react";
+import React, {useState} from "react";
 import {Navbar, Nav} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import {Form, FormControl, Button} from 'react-bootstrap'
 import SecureContent from "../../context/secure-context.js"
 import { BagFill } from 'react-bootstrap-icons';
 
+function SearchForm() {
+    const [searchValue, setSearchValue] = useState('');
+    
+    const handleSearch = (e) => {
+        e.preventDefault(); // Prevents the form from submitting and refreshing the page
+        console.log(searchValue); // Logs the input value to the console
+    };
+    
+    return (
+        <Form className="d-flex" onSubmit={handleSearch}>
+            <FormControl
+                type="search"
+                onChange={(e) => setSearchValue(e.target.value)}
+                value={searchValue}
+                placeholder="Search products"
+                className="me-2"
+                aria-label="Search"
+                name="search"
+            />
+            <Button onClick={handleSearch} variant="outline-primary" type="submit" href="/search">Search</Button>
+        </Form>
+    );
+}
+
 const NavBar = () => {
-        //TO-DO 
-        const handleSearch = (e) => {
-            e.preventDefault();
-            console.log("searching");
-        }
+        //TO-DO
         return (
             <Navbar variant="light" expand="lg">
            
@@ -52,74 +72,10 @@ const NavBar = () => {
                              <Nav.Link>Search</Nav.Link>
                          </LinkContainer>
                 </Nav>
-                <Form className="d-flex" onSubmit={handleSearch}>
-                  <FormControl
-                    type="search"
-                    placeholder="Search products"
-                    className="me-2"
-                    aria-label="Search"
-          
-                  />
-                  <Button variant="outline-primary" type="submit" href="/search">Search</Button>
-                </Form>
+                <SearchForm/>
               </Navbar.Collapse>
          
           </Navbar>
-    // //TO-DO 
-    // const handleSearch = (e) => {
-    //     e.preventDefault();
-    //     console.log("searching");
-    // }
-    // return (
-    //     <div className="navbar">
-    //         <Navbar variant="light" expand="lg" collapseOnSelect>
-    //             <LinkContainer to="/">
-    //                 <Navbar.Brand><BagFill/>JungleMarket</Navbar.Brand>
-    //             </LinkContainer>
-    //             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    //             <Navbar.Collapse id="basic-navbar-nav">
-    //                 <Nav className="mr-auto">
-    //                     <SecureContent
-    //                     nonloggedincontent={
-    //                     <LinkContainer to="/login">
-    //                         <Nav.Link>Login</Nav.Link>
-    //                     </LinkContainer>
-    //                     } loggedincontent= {
-    //                         <LinkContainer to="/logout">
-    //                             <Nav.Link>Logout</Nav.Link>
-    //                         </LinkContainer>
-    //                         }
-    //                     />
-                        
-    //                     <SecureContent
-    //                     loggedincontent={
-    //                         <LinkContainer to="/profile">
-    //                             <Nav.Link>Profile</Nav.Link>
-    //                         </LinkContainer>
-    //                     } nonloggedincontent={
-    //                     <LinkContainer to="/signup">
-    //                         <Nav.Link>Signup</Nav.Link>
-    //                     </LinkContainer>
-    //                     }
-    //                    />
-    //                    <LinkContainer to="/details">
-    //                         <Nav.Link>Details</Nav.Link>
-    //                     </LinkContainer>
-    //                     <LinkContainer to="/cart">
-    //                         <Nav.Link>Cart</Nav.Link>
-    //                     </LinkContainer>
-    //                     <LinkContainer to="/search">
-    //                         <Nav.Link>Search</Nav.Link>
-    //                     </LinkContainer>
-
-    //                 </Nav>
-    //                 <Form className="d-flex" onSubmit={handleSearch} >
-    //                     <Form.Control type="text" placeholder="Search products" className="" />
-    //                     <Button variant="outline-success" type="submit">Search</Button>
-    //                     </Form>
-    //             </Navbar.Collapse>
-    //         </Navbar>
-    //     </div>
     )
 }
 
