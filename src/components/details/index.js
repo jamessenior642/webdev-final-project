@@ -30,9 +30,9 @@ const Details = () => {
     const curSessionUser = await checkLoggedIn();
     const actualReview = await reviewService.postReview(
       curSessionUser._id,
-      product.id,
+      product.itemId,
       {
-        rating: reviewText,
+        text: reviewText,
         reviewer: curSessionUser._id,
         userName: curSessionUser.userName,
       }
@@ -44,7 +44,7 @@ const Details = () => {
   useEffect(() => {
     fetchProductByID();
     findReviews();
-  }, [product]);
+  }, [id]);
 
   return (
     <>
@@ -62,6 +62,7 @@ const Details = () => {
         </div>
         <div className="col-md-6">
           <h3>{product.title}</h3>
+          <p>Condition: {product.condition}</p>
           <p>${product.price.value}</p>
            {/* reviews */}
           <h2 className="my-4">Reviews</h2>
@@ -95,8 +96,6 @@ const Details = () => {
       </ul>
         </div>
       </div>
-
-      
     </div>
     )}
     </>
