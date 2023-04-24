@@ -5,9 +5,8 @@ import * as productService from "../../services/product-service.js";
 import * as reviewService from "../../services/review-service.js";
 import { useProfile } from "../../context/profile-context.js";
 import SecureContent from "../../context/secure-context.js"
-
 const Details = () => {
-  const [product, setProducts] = useState([]);
+  const [product, setProducts] = useState('');
   const [reviews, setReviews] = useState([]);
   const { checkLoggedIn } = useProfile();
   const { id } = useParams();
@@ -15,7 +14,10 @@ const Details = () => {
 
   const fetchProductByID = async () => {
     const response = await productService.getProductById2(id);
-    setProducts(response);
+    setProducts({
+      ...product,
+      ...response});
+      return product 
   };
 
   const findReviews = async () => {
@@ -42,9 +44,11 @@ const Details = () => {
   useEffect(() => {
     fetchProductByID();
     findReviews();
-  }, []);
+  }, [product]);
 
   return (
+    <>
+    {product && (
     <div className="container">
       <h1 className="text-center my-4">Details</h1>
       <div className="row">
@@ -94,6 +98,8 @@ const Details = () => {
 
       
     </div>
+    )}
+    </>
   );
 };
 
