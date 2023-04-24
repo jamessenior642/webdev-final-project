@@ -13,6 +13,7 @@ export const getProductsbyKeyword = async (keyword) => {
     };
 
 export const getProductsbyKeyword2 = async (keyword) => {
+    console.log(`keyword: ${keyword}`)
     const response = await axios.get(`https://api.ebay.com/buy/browse/v1/item_summary/search?q=${keyword}&limit=3`
     , {
         headers: {

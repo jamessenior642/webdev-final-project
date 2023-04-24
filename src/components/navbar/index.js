@@ -5,13 +5,17 @@ import {LinkContainer} from 'react-router-bootstrap'
 import {Form, FormControl, Button} from 'react-bootstrap'
 import SecureContent from "../../context/secure-context.js"
 import { BagFill } from 'react-bootstrap-icons';
+import { useNavigate } from "react-router-dom";
 
 function SearchForm() {
     const [searchValue, setSearchValue] = useState('');
     
+    const navigate = useNavigate();
+    
     const handleSearch = (e) => {
         e.preventDefault(); // Prevents the form from submitting and refreshing the page
-        console.log(searchValue); // Logs the input value to the console
+        navigate(`/search/${searchValue}`); // Redirects the user to /search
+        // console.log(searchValue); // Logs the input value to the console
     };
     
     return (
