@@ -15,7 +15,7 @@ const Details = () => {
 
   const fetchProductByID = async () => {
     const response = await productService.getProductById2(id);
-    setProducts(response.data);
+    setProducts(response);
   };
 
   const findReviews = async () => {
@@ -49,7 +49,7 @@ const Details = () => {
       <h1 className="text-center my-4">Details</h1>
       <div className="row">
         <div className="col-md-4">
-          <img
+          <img 
             src={product.image.imageUrl}
             alt="product image"
             className="img-fluid rounded"
@@ -58,8 +58,7 @@ const Details = () => {
         </div>
         <div className="col-md-6">
           <h3>{product.title}</h3>
-          <p>{product.description}</p>
-          <p> ${product.price}</p>
+          <p>${product.price.value}</p>
            {/* reviews */}
           <h2 className="my-4">Reviews</h2>
           <SecureContent 
