@@ -31,13 +31,7 @@ function SearchForm() {
 }
 
 const NavBar = () => {
-        //TO-DO 
-        const handleSearch = (event) => {
-            event.preventDefault();
-            
-            const searchQuery = event.target.elements.search.value; // get the value of the search bar input
-            console.log(searchQuery);
-        }
+        //TO-DO
         return (
             <Navbar variant="light" expand="lg">
            
