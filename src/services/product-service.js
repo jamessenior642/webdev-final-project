@@ -27,8 +27,15 @@ export const getProductsbyKeyword2 = async (keyword) => {
 
 
 export const getProducts = async () => {
-    const response = await api.get(`${SEARCH_URL}`);
-    return response;
+    const response = await api.get(`${EBAY_URL}fjallraven&limit=5`
+    , {
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      return response.data;
+    return response.data;
     };
 
 export const getProductById = async (productID) => {
