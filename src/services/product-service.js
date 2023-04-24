@@ -41,6 +41,18 @@ export const getProductById = async (productID) => {
         return response;
 };
 
+export const getProductById2 = async (productID) => {
+    const response = await axios.get(`https://api.ebay.com/buy/browse/v1/item/${productID}`
+    , {
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      console.log(response)
+      return response.data;
+    };
+
       
 
     // const options = {

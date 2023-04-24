@@ -14,7 +14,7 @@ const Details = () => {
   const [reviewText, setReviewText] = useState('');
 
   const fetchProductByID = async () => {
-    const response = await productService.getProductById(id);
+    const response = await productService.getProductById2(id);
     setProducts(response.data);
   };
 
@@ -50,7 +50,7 @@ const Details = () => {
       <div className="row">
         <div className="col-md-4">
           <img
-            src={product.image}
+            src={product.image.imageUrl}
             alt="product image"
             className="img-fluid rounded"
             // style={{height:500,}}
