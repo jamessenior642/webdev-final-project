@@ -13,7 +13,6 @@ const Profile = () => {
 
   const checkUser = async () => {
     const user = await userService.getUserByEmail(profile.email);
-    console.log(user);
     setUserName(user.userName);
     setEmail(user.email);
     setPassword(user.password);

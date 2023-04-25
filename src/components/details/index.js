@@ -21,8 +21,9 @@ const Details = () => {
   };
 
   const findReviews = async () => {
-    const reviews = await reviewService.findReviewsByProductID(id);
-    setReviews(reviews);
+    console.log(reviewService.findReviewsByProductID(id), "YOOOO")
+  // const reviews = await reviewService.findReviewsByProductID(id);
+  // setReviews(reviews);
   };
 
 
@@ -30,11 +31,12 @@ const Details = () => {
     const curSessionUser = await checkLoggedIn();
     console.log("posting review")
     const actualReview = await reviewService.postReview(
+      curSessionUser._id,
       product.itemId,
       {
         text: reviewText,
         reviewer: curSessionUser._id,
-        userName: curSessionUser.userName,
+        userName: curSessionUser.username,
       }
     );
     console.log(product);

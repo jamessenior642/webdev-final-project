@@ -13,7 +13,6 @@ export const getProductsbyKeyword = async (keyword) => {
     };
 
 export const getProductsbyKeyword2 = async (keyword) => {
-    console.log(`keyword: ${keyword}`)
     const response = await axios.get(`https://api.ebay.com/buy/browse/v1/item_summary/search?q=${keyword}&limit=3`
     , {
         headers: {
@@ -21,7 +20,6 @@ export const getProductsbyKeyword2 = async (keyword) => {
           'Content-Type': 'application/json'
         }
       })
-      console.log(response)
       return response.data;
     };
 
@@ -50,7 +48,6 @@ export const getProductById2 = async (productID) => {
           'Content-Type': 'application/json'
         }
       })
-      // console.log(response)
       return response.data;
     };
 
