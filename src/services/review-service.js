@@ -10,7 +10,7 @@ export const postReview = async (productID, review) => {
 	const userID = review.reviewer;
 	console.log(review);
 	const response = await api.post(
-		`${API_URL}${productID}/reviews/${userID}`,
+		`${API_URL}/${productID}/reviews/${userID}`,
 		reviewText
 	);
 	return response.data;
@@ -18,7 +18,7 @@ export const postReview = async (productID, review) => {
 
 export const findReviewsByProductID = async (productID) => {
 	const response = await api.get(`${API_URL}/${productID}/reviews`);
-	console.log("findReviewsByProductID");
+	console.log(response);
 	return response.data;
 };
 
