@@ -33,7 +33,6 @@ function App() {
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/search/:searchQuery" element={<Search/>} />
         <Route path="/profile" element={<Profile/>} />
-        <Route path="/details" element={<Details/>} />
         <Route path="/details/:id" element={<Details/>} />
       </Routes>
       </div>

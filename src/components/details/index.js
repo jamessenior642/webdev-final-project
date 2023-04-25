@@ -28,8 +28,8 @@ const Details = () => {
 
   const handleReview = async () => {
     const curSessionUser = await checkLoggedIn();
+    console.log("posting review")
     const actualReview = await reviewService.postReview(
-      curSessionUser._id,
       product.itemId,
       {
         text: reviewText,
