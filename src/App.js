@@ -8,6 +8,7 @@ import Login from "./components/login";
 import SignUp from "./components/signup";
 import Search from "./components/search";
 import Profile from "./components/profile";
+import ProfileView from "./components/profile-view";
 import Details from "./components/details";
 import Logout from "./components/logout";
 import { ProfileProvider } from "./context/profile-context";
@@ -33,6 +34,7 @@ function App() {
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/search/:searchQuery" element={<Search/>} />
         <Route path="/profile" element={<Profile/>} />
+        <Route path="/profile-view/:userID" element={<ProfileView/>} />
         <Route path="/details/:id" element={<Details/>} />
       </Routes>
       </div>

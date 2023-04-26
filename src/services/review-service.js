@@ -23,7 +23,7 @@ export const findReviewsByProductID = async (productID) => {
 
 export const findReviewsByUserId = async (userId) => {
 	const response = await api.get(
-		`http://localhost:4000/api/users/${userId}/reviews`
+		`http://localhost:4000/api/products/${userId}/reviews`
 	);
 	return response.data;
 };

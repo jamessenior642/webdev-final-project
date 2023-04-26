@@ -96,7 +96,7 @@ const Details = () => {
 								{reviews.map((review) => (
 									<li className="list-group-item">
 										<h2>
-                      <Link to={`/profile`} className="links">
+                      <Link to={`/profile-view/${review.reviewer}`} className="links">
 										  {review && review.username}
 										</Link> 
                     </h2>
