@@ -38,7 +38,7 @@ const Details = () => {
 				{
 					text: reviewText,
 					reviewer: curSessionUser._id,
-					userName: curSessionUser.userName,
+					username: curSessionUser.username,
 				}
 			);
 			console.log(product);
@@ -91,16 +91,20 @@ const Details = () => {
 										Post
 									</Button>
 								</InputGroup>}/>
+              {reviews.length > 0 ? 
 							<ul className="list-group">
 								{reviews.map((review) => (
 									<li className="list-group-item">
-										{/*<Link to={`/profile`} className="links">*/}
-										{/*  {review && review.username}:*/}
-										{/*</Link>*/}
-										<p>{review && review.text}</p>
+										<h2>
+                      <Link to={`/profile`} className="links">
+										  {review && review.username}
+										</Link> 
+                    </h2>
+										<p>"{review.text}"</p>
 									</li>
 								))}
-							</ul>
+							</ul> : <h4>Be the first to review!</h4>}
+
 						</div>
 					</div>
 				</div>

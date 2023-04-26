@@ -6,12 +6,11 @@ const api = axios.create({withCredentials: true});
 export const postReview = async (productID, review) => {
 	console.log("postReview");
 	console.log(productID);
-	const reviewText = review.text;
 	const userID = review.reviewer;
 	console.log(review);
 	const response = await api.post(
 		`${API_URL}/${productID}/reviews/${userID}`,
-		reviewText
+		review
 	);
 	return response.data;
 };
