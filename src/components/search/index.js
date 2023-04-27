@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 const Search = () => {
     const { searchQuery } = useParams();
     const [products, setProducts] = useState([]);
-    
+
     useEffect(() => {
         const productList = async () => {
             console.log(`product search: ${searchQuery}`)
@@ -14,7 +14,7 @@ const Search = () => {
         };
         productList();
     }, [searchQuery]);
-    
+
     return (
         <div className="container">
             <h1 className="text-center my-4">Search Results</h1>
@@ -30,11 +30,13 @@ const Search = () => {
                                 style={{ objectFit: "cover" }}
                             />
                             <div className="card-body">
-                                <Link className = "text-decoration-none" to={`/details/${product.itemId}`}>
+                                <Link className="text-decoration-none" to={`/details/${product.itemId}`}>
                                     <h3 className="card-title">{product.title}</h3>
                                 </Link>
-                                <p className="card-text">Condition: {product.condition}</p>
-                                <p className="card-text">${product.price.value}</p>
+                                <div className="d-flex justify-content-between">
+                                    <p className="card-text mb-0">Condition: {product.condition}</p>
+                                    <p className="card-text mb-0">${product.price.value}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
