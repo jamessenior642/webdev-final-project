@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from "react";
 import {useParams, Link} from "react-router-dom";
-import {InputGroup, FormControl, Button} from "react-bootstrap";
+import {InputGroup, FormControl, Button, Card} from "react-bootstrap";
 import * as productService from "../../services/product-service.js";
 import * as reviewService from "../../services/review-service.js";
 import {useProfile} from "../../context/profile-context.js";
@@ -55,29 +55,26 @@ const Details = () => {
 	return (
 		<>
 			{product && (
-				<div className="container">
-					<h1 className="text-center my-4">Details</h1>
+				<div className="container py-5">
+					<h1 className="text-center my-5">Details</h1>
 					<div className="row">
 						<div className="col-md-4">
-							<img
-								src={product.image.imageUrl}
-								alt="product image"
-								className="img-fluid rounded"
-								// style={{height:500,}}
-							/>
+							<Card className="shadow">
+								<Card.Img
+									src={product.image.imageUrl}
+									alt="product image"
+									className="img-fluid rounded"
+								/>
+							</Card>
 						</div>
 						<div className="col-md-6">
 							<h3>{product.title}</h3>
-							<p>Condition: {product.condition}</p>
-							<p>${product.price.value}</p>
+							<p className="text-muted">Condition: {product.condition}</p>
+							<p className="text-primary">${product.price.value}</p>
 							{/* reviews */}
 							<h2 className="my-4">Reviews</h2>
 							<SecureContent
-								// sign in button
-								nonloggedincontent={<Link to="/login">
-									<button className="btn btn-primary">Sign in to add review</button>
-								</Link>}
-								// review form
+								nonloggedincontent={<Link to="/login" className="btn btn-primary mb-3">Sign in to add review</Link>}
 								loggedincontent={<InputGroup className="mb-3">
 									<FormControl
 										value={reviewText}
@@ -90,25 +87,24 @@ const Details = () => {
 										Post
 									</Button>
 								</InputGroup>}/>
-              {reviews.length > 0 ? 
-							<ul className="list-group">
-								{reviews.map((review) => (
-									<li className="list-group-item">
-										<h2>
-                      <Link to={`/profile-view/${review.userID}`} className="links">
-										  {review && review.username}
-										</Link> 
-                    </h2>
-										<p>"{review.text}"</p>
-									</li>
-								))}
-							</ul> : <h4>Be the first to review!</h4>}
-
+							{reviews.length > 0 ? 
+								<ul className="list-group">
+									{reviews.map((review) => (
+										<li className="list-group-item">
+											<h2>
+											  <Link to={`/profile-view/${review.userID}`} className="text-primary">
+											  {review && review.username}
+											</Link> 
+											</h2>
+											<p>"{review.text}"</p>
+										</li>
+									))}
+								</ul> : <h4>Be the first to review!</h4>}
 						</div>
 					</div>
 				</div>
 			)}
-			</>
+		</>
 	);
 };
 
