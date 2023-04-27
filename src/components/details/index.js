@@ -12,6 +12,7 @@ const Details = () => {
 	const {checkLoggedIn} = useProfile();
 	const {id} = useParams();
 	const [reviewText, setReviewText] = useState('');
+	const [curSessionUser, setCurSessionUser] = useState();
 	
 	const fetchProductByID = async () => {
 		const response = await productService.getProductById2(id);
@@ -46,8 +47,24 @@ const Details = () => {
 			console.log(e);
 		}
 	};
+
+
+// Add a deleteReview function
+const deleteReview = async (reviewId) => {
+	try {
+		await reviewService.deleteReview(reviewId);
+		setReviews(reviews.filter(review => review._id !== reviewId));
+	} catch (e) {
+		console.log(e);
+	}
+};
 	
 	useEffect(() => {
+		const fetchSessionUser = async () => {
+			const user = await checkLoggedIn();
+			setCurSessionUser(user);
+		}
+		fetchSessionUser();
 		fetchProductByID();
 		findReviews();
 	}, [id]);
@@ -89,17 +106,23 @@ const Details = () => {
 								</InputGroup>}/>
 							{reviews.length > 0 ? 
 								<ul className="list-group">
-									{reviews.map((review) => (
-										<li className="list-group-item">
+								{reviews.map((review) => (
+									<li className="list-group-item d-flex justify-content-between align-items-center">
+										<div>
 											<h2>
-											  <Link to={`/profile-view/${review.userID}`} className="text-primary">
-											  {review && review.username}
-											</Link> 
+												<Link to={`/profile-view/${review.userID}`} className="text-primary">
+													{review && review.username}
+												</Link> 
 											</h2>
 											<p>"{review.text}"</p>
-										</li>
-									))}
-								</ul> : <h4>Be the first to review!</h4>}
+										</div>
+										{/* Show delete button only if user is the author of the review */}
+										{curSessionUser && review.userID === curSessionUser._id && 
+											<button onClick={() => deleteReview(review._id)} className="btn btn-danger">Delete</button>
+										}
+									</li>
+								))}
+							</ul> : <h4>Be the first to review!</h4>}
 						</div>
 					</div>
 				</div>
