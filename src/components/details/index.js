@@ -19,12 +19,11 @@ const Details = () => {
 			...product,
 			...response
 		});
-		return product
+		console.log(response)
 	};
 	
 	const findReviews = async () => {
 		const reviews = await reviewService.findReviewsByProductID(id);
-		console.log(reviews)
 		setReviews(reviews);
 	};
 	

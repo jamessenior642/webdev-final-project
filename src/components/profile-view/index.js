@@ -26,16 +26,16 @@ const ProfileView = () => {
     const fetchProducts = async () => {
         // for every review in reviews, find the product
         const products = await Promise.all(reviews.map(async (review) => {
-            const product = await productService.getProductById(review.productID);
-            return product;
+        const product = await productService.getProductById(review.productID);
         }));
         setProducts(products);
+        console.log(products)
     }
 
     useEffect(() => {
         checkUser();
-        fetchReviews();
-        fetchReviews();
+        //fetchReviews();
+        //fetchProducts();
     }
     , [userID]);
 
