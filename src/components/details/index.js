@@ -91,6 +91,11 @@ const deleteReview = async (reviewId) => {
 							<p className="text-primary">${product.price.value}</p>
 							{/* reviews */}
 							<h2 className="my-4">Reviews</h2>
+							<SellerContext
+								sellercontent={<div className="text-center my-4" > <h2 className="my-4">You are a Seller</h2>
+								<p> You have the ability to delete any prodcut reviewes </p> </div>
+							}
+								nonseelleercontent= {
 							<SecureContent
 								nonloggedincontent={<Link to="/login" className="btn btn-primary mb-3">Sign in to add review</Link>}
 								loggedincontent={<InputGroup className="mb-3">
@@ -104,19 +109,20 @@ const deleteReview = async (reviewId) => {
 									<Button onClick={handleReview} variant="primary" id="button-addon2">
 										Post
 									</Button>
-								</InputGroup>}/>
+
+								</InputGroup>}
+								/>
+								}
+							/>
 							{reviews.length > 0 ? 
 								<ul className="list-group">
 								{reviews.map((review) => (
 									<li className="list-group-item d-flex justify-content-between align-items-center">
 										<div>
 											<h2>
-											<Link 
-  to={curSessionUser && review.userID === curSessionUser._id ? "/profile" : `/profile-view/${review.userID}`} 
-  className="text-primary"
->
-  {review && review.username}
-</Link>
+												<Link to={`/profile-view/${review.userID}`} className="text-primary">
+													{review && review.username}
+												</Link> 
 											</h2>
 											<p>"{review.text}"</p>
 										</div>
