@@ -3,8 +3,6 @@ import * as service from "../services/auth-service";
 
 const ProfileContext = React.createContext();
 
-
-
 export const ProfileProvider = ({ children }) => {
   const [profile, setProfile] = useState();
   const [loading, setLoading] = useState(true);
@@ -17,6 +15,10 @@ export const ProfileProvider = ({ children }) => {
       throw e;
 
     }
+  };
+
+  const updateProfile = (updatedProfile) => {
+    setProfile(updatedProfile);
   };
 
   const logout = async () => {
