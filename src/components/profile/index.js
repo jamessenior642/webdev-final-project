@@ -111,7 +111,9 @@ const Profile = () => {
               )}
             </div>
           </div>
-          <div className="reviews my-5">
+        </div>
+      </div>
+      <div className="reviews my-5">
             <h2>Reviewed Products</h2>
             <div className="row">
               {products.map((product) => (
@@ -137,8 +139,6 @@ const Profile = () => {
               ))}
             </div>
           </div>
-        </div>
-      </div>
     </div>
   );
 };
