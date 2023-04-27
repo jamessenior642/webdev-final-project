@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import * as service from "../../services/auth-service";
+import { useProfile } from "../../context/profile-context";
 
 const SignUp = () => {
     const emailRef = useRef();
@@ -31,6 +32,31 @@ const SignUp = () => {
             setError(true);
         }
     };
+
+    const { login } = useProfile();
+
+    const loginSubmit = async () => {
+        if (
+          !(
+            emailRef.current.value === "" ||
+            passwordRef.current.value === ""
+          )
+        ) {
+          try {
+            await login(emailRef.current.value, passwordRef.current.value);
+            navigate("/");
+            navigate(0);
+          } catch (e) {
+            setError(true);
+          }
+        }
+      };
+
+      const handleSignUp = async () => {
+        await signup();
+        loginSubmit();
+      };
+    
 
     return (
         <div className="container"> 
@@ -104,7 +130,7 @@ const SignUp = () => {
                                         Please fill out all fields!
                                     </div>
                                 )}
-                                <button type="button" className="btn btn-primary btn-block" onClick={signup}>
+                                <button type="button" className="btn btn-primary btn-block" onClick={handleSignUp}>
                                     Sign Up
                                 </button>
                             </form>

@@ -95,7 +95,7 @@ const Details = () => {
 							<h2 className="my-4">Reviews</h2>
 							<SellerContext
 								sellercontent={<div className="text-center my-4" > <h2 className="my-4">You are a Seller</h2>
-								<p> You have the ability to delete any prodcut reviewes </p> </div>
+								<p> You have the ability to delete any product reviews </p> </div>
 							}
 								nonsellercontent= {
 							<SecureContent
