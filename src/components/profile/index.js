@@ -5,11 +5,12 @@ import * as userService from "../../services/user-service";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
-  const { profile } = useProfile();
+  const { profile, loading } = useProfile();
   const [username, setUsername] = React.useState();
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
   const [err, setError] = React.useState(false);
+
 
   const checkUser = async () => {
     const user = await userService.getUserByEmail(profile.email);

@@ -1,10 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import * as service from "../services/auth-service";
 
 const ProfileContext = React.createContext();
 
+
+
 export const ProfileProvider = ({ children }) => {
   const [profile, setProfile] = useState();
+  const [loading, setLoading] = useState(true);
 
   const login = async (email, password) => {
     try {
@@ -44,6 +47,18 @@ export const ProfileProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const profileData = await service.profile();
+      setProfile(profileData);
+      setLoading(false);
+    };
+  
+    fetchProfile();
+  }, []);
+
+
+
   const value = { profile, signup, checkLoggedIn, login, logout };
   return (
     <ProfileContext.Provider value={value}>{children}</ProfileContext.Provider>
@@ -51,5 +66,7 @@ export const ProfileProvider = ({ children }) => {
 };
 
 export const useProfile = () => {
+
+
   return useContext(ProfileContext);
 };
