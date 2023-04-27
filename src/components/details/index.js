@@ -95,7 +95,7 @@ const deleteReview = async (reviewId) => {
 								sellercontent={<div className="text-center my-4" > <h2 className="my-4">You are a Seller</h2>
 								<p> You have the ability to delete any prodcut reviewes </p> </div>
 							}
-								nonseelleercontent= {
+								nonsellercontent= {
 							<SecureContent
 								nonloggedincontent={<Link to="/login" className="btn btn-primary mb-3">Sign in to add review</Link>}
 								loggedincontent={<InputGroup className="mb-3">
