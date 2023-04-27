@@ -95,7 +95,7 @@ const Details = () => {
 								{reviews.map((review) => (
 									<li className="list-group-item">
 										<h2>
-                      <Link to={`/profile-view/${review.reviewer}`} className="links">
+                      <Link to={`/profile-view/${review.userID}`} className="links">
 										  {review && review.username}
 										</Link> 
                     </h2>
@@ -108,7 +108,7 @@ const Details = () => {
 					</div>
 				</div>
 			)}
-		</>
+			</>
 	);
 };
 

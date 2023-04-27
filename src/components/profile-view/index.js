@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import * as productService from "../../services/product-service.js";
 import * as reviewService from "../../services/review-service.js";
 import * as userService from "../../services/user-service.js";
@@ -6,7 +6,7 @@ import {useParams, Link, useNavigate} from "react-router-dom";
 
 
 const ProfileView = () => {
-    const navigate = useNavigate();
+    const [isReady, setIsReady] = useState(false);
     const [user, setUser] = useState({});
     const {userID} = useParams();
 
@@ -19,28 +19,52 @@ const ProfileView = () => {
         return user;
     }
 
-    const fetchReviews = async () => {
-        const review = await reviewService.findReviewsByUserId(userID);
-        setReviews(review);
-    }
+    // const fetchReviews = async () => {
+    //     const review = await reviewService.findReviewsByUserId(userID);
+    //     setReviews(review);
+    // }
     const fetchProducts = async () => {
-        // for every review in reviews, find the product
-        const products = await Promise.all(reviews.map(async (review) => {
-        const product = await productService.getProductById(review.productID);
+        // wait for reviews to be fetched
+        const reviews = await fetchReviews();
+        setReviews(reviews);
+      
+        // for every review in reviews, create a list of products
+        const products = await Promise.all(reviews.map(async (r) => {
+          const product = await productService.getProductById2(r.productID);
+          return product;
         }));
+      
         setProducts(products);
-        console.log(products)
+      }
+      
+    const fetchReviews = async () => {
+        return reviewService.findReviewsByUserId(userID)
     }
+    useEffect(() => {
+        checkUser()
+        fetchProducts();
+    }, []);
 
     useEffect(() => {
-        checkUser();
-        //fetchReviews();
-        //fetchProducts();
+        console.log(products);
+        setIsReady(true);
+      }, [products]);
+
+
+
+    if (!isReady) {
+        
+        return (
+        <div className="container">
+            <h1 className="text-center my-4">Loading...</h1>
+        </div>
+        );
     }
-    , [userID]);
 
     // only display the username and the list of products with their reviews below
-    return (user? (
+    return (
+    <>
+    {reviews && (
         <div className="container">
             <h1 className="text-center my-4">{user.username}'s Reviews</h1>
             <h2>Reviewed Products</h2>
@@ -61,13 +85,16 @@ const ProfileView = () => {
                                 </Link>
                                 <p className="card-text">Condition: {product.condition}</p>
                                 <p className="card-text">${product.price.value}</p>
+                                <p className="card-text">Review: {reviews[products.indexOf(product)].text}</p>
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
         </div>
-    ) : <div></div>);
+    )}
+                </>
+            )
 }
 
             
