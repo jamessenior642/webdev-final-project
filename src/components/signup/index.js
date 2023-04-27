@@ -24,10 +24,8 @@ const SignUp = () => {
                     emailRef.current.value,
                     usernameRef.current.value,
                     passwordRef.current.value,
-                    userType
-                )
-                .then(() => navigate("/"))
-                .catch((e) => console.log(e) && setError(true));
+                    userType.toString()
+                ).catch((e) => console.log(e) && setError(true));
         } else {
             setError(true);
         }

@@ -69,8 +69,6 @@ const NavBar = () => {
                         </LinkContainer>
                         }
                        />
-   
-
                 </Nav>
                 <SearchForm/>
               </Navbar.Collapse>
