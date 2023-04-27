@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { profile } = useProfile();
-  const [userName, setUserName] = React.useState();
+  const [username, setUsername] = React.useState();
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
   const [err, setError] = React.useState(false);
 
   const checkUser = async () => {
     const user = await userService.getUserByEmail(profile.email);
-    setUserName(user.userName);
+    setUsername(user.username);
     setEmail(user.email);
     setPassword(user.password);
   };
@@ -26,7 +26,7 @@ const Profile = () => {
     <div className="container">
       <h1 className="text-center my-4">Profile</h1>
       <h2>Email: {profile.email}</h2>
-      <h2>Username: {profile.userName}</h2>
+      <h2>Username: {profile.username}</h2>
 
       <div className="row">
         <div className="col-md-6 offset-md-3">
@@ -38,8 +38,8 @@ const Profile = () => {
                 className="form-control"
                 id="username"
                 placeholder="Enter username"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
             <div className="form-group my-2">
@@ -68,7 +68,7 @@ const Profile = () => {
               className="btn btn-primary"
               onClick={async () => {
                 try {
-                  await userService.updateUser(profile._id, userName, email, password);
+                  await userService.updateUser(profile._id, username, email, password);
                   setError(false);
                 } catch (e) {
                   setError(true);
