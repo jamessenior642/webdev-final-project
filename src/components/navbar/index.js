@@ -69,12 +69,8 @@ const NavBar = () => {
                         </LinkContainer>
                         }
                        />
-                  <LinkContainer to="/details">
-                             <Nav.Link>Details</Nav.Link>
-                         </LinkContainer>
-                         <LinkContainer to="/search">
-                             <Nav.Link>Search</Nav.Link>
-                         </LinkContainer>
+   
+
                 </Nav>
                 <SearchForm/>
               </Navbar.Collapse>
