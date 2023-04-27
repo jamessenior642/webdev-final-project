@@ -3,6 +3,7 @@ import {useParams, Link} from "react-router-dom";
 import {InputGroup, FormControl, Button, Card} from "react-bootstrap";
 import * as productService from "../../services/product-service.js";
 import * as reviewService from "../../services/review-service.js";
+import SellerContext from "../../context/seller-context.js";
 import {useProfile} from "../../context/profile-context.js";
 import SecureContent from "../../context/secure-context.js"
 
@@ -120,6 +121,10 @@ const deleteReview = async (reviewId) => {
 										{curSessionUser && review.userID === curSessionUser._id && 
 											<button onClick={() => deleteReview(review._id)} className="btn btn-danger">Delete</button>
 										}
+										<SellerContext sellercontent={
+										<button onClick={() => deleteReview(review._id)} className="btn btn-danger">Delete</button>
+										}
+										/>
 									</li>
 								))}
 							</ul> : <h4>Be the first to review!</h4>}
