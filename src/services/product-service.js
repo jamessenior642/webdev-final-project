@@ -25,15 +25,19 @@ export const getProductsbyKeyword2 = async (keyword) => {
 
 
 export const getProducts = async () => {
-    const response = await api.get(`${EBAY_URL}fjallraven&limit=6`
-    , {
-        headers: {
-          Authorization: `Bearer ${API_KEY}`,
-          'Content-Type': 'application/json'
-        }
-      })
-      return response.data;
+    const url = 'https://api.ebay.com/buy/browse/v1/item_summary/search';
+    const headers = {
+        Authorization: `Bearer ${API_KEY}`,
+        'Content-Type': 'application/json'
     };
+    const params = {
+        'sort': 'creationTimeNewest',
+        'limit': '6',
+        'category_ids': '9355'
+    }
+    const response = await api.get(url, { headers, params });
+    return response.data;
+};
 
 export const getProductById = async (productID) => {
         const response = await api.get(`${SEARCH_URL}/${productID}`);
