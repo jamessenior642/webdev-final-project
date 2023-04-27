@@ -1,20 +1,20 @@
-import React, {useEffect, useState, useRef} from "react";
-import {useParams, Link} from "react-router-dom";
-import {InputGroup, FormControl, Button, Card} from "react-bootstrap";
+import React, { useEffect, useState, useRef } from "react";
+import { useParams, Link } from "react-router-dom";
+import { InputGroup, FormControl, Button, Card } from "react-bootstrap";
 import * as productService from "../../services/product-service.js";
 import * as reviewService from "../../services/review-service.js";
 import SellerContext from "../../context/seller-context.js";
-import {useProfile} from "../../context/profile-context.js";
+import { useProfile } from "../../context/profile-context.js";
 import SecureContent from "../../context/secure-context.js"
 
 const Details = () => {
 	const [product, setProducts] = useState('');
 	const [reviews, setReviews] = useState([]);
-	const {checkLoggedIn} = useProfile();
-	const {id} = useParams();
+	const { checkLoggedIn } = useProfile();
+	const { id } = useParams();
 	const [reviewText, setReviewText] = useState('');
 	const [curSessionUser, setCurSessionUser] = useState();
-	
+
 	const fetchProductByID = async () => {
 		const response = await productService.getProductById2(id);
 		setProducts({
@@ -23,13 +23,13 @@ const Details = () => {
 		});
 		console.log(response)
 	};
-	
+
 	const findReviews = async () => {
 		const reviews = await reviewService.findReviewsByProductID(id);
 		setReviews(reviews);
 	};
-	
-	
+
+
 	const handleReview = async () => {
 		const curSessionUser = await checkLoggedIn();
 		console.log("posting review")
@@ -50,16 +50,16 @@ const Details = () => {
 	};
 
 
-// Add a deleteReview function
-const deleteReview = async (reviewId) => {
-	try {
-		await reviewService.deleteReview(reviewId);
-		setReviews(reviews.filter(review => review._id !== reviewId));
-	} catch (e) {
-		console.log(e);
-	}
-};
-	
+	// Add a deleteReview function
+	const deleteReview = async (reviewId) => {
+		try {
+			await reviewService.deleteReview(reviewId);
+			setReviews(reviews.filter(review => review._id !== reviewId));
+		} catch (e) {
+			console.log(e);
+		}
+	};
+
 	useEffect(() => {
 		const fetchSessionUser = async () => {
 			const user = await checkLoggedIn();
@@ -69,7 +69,7 @@ const deleteReview = async (reviewId) => {
 		fetchProductByID();
 		findReviews();
 	}, [id]);
-	
+
 	return (
 		<>
 			{product && (
@@ -87,8 +87,10 @@ const deleteReview = async (reviewId) => {
 						</div>
 						<div className="col-md-6">
 							<h3>{product.title}</h3>
-							<p className="text-muted">Condition: {product.condition}</p>
-							<p className="text-primary">${product.price.value}</p>
+							<div className="d-flex justify-content-between">
+								<p className="card-text mb-0">Condition: {product.condition}</p>
+								<p className="card-text mb-0">${product.price.value}</p>
+							</div>
 							{/* reviews */}
 							<h2 className="my-4">Reviews</h2>
 							<SellerContext
@@ -110,33 +112,33 @@ const deleteReview = async (reviewId) => {
 										Post
 									</Button>
 
-								</InputGroup>}
-								/>
+										</InputGroup>}
+									/>
 								}
 							/>
-							{reviews.length > 0 ? 
+							{reviews.length > 0 ?
 								<ul className="list-group">
-								{reviews.map((review) => (
-									<li className="list-group-item d-flex justify-content-between align-items-center">
-										<div>
-											<h2>
-												<Link to={`/profile-view/${review.userID}`} className="text-primary">
-													{review && review.username}
-												</Link> 
-											</h2>
-											<p>"{review.text}"</p>
-										</div>
-										{/* Show delete button only if user is the author of the review */}
-										{curSessionUser && review.userID === curSessionUser._id && 
-											<button onClick={() => deleteReview(review._id)} className="btn btn-danger">Delete</button>
-										}
-										<SellerContext sellercontent={
-										<button onClick={() => deleteReview(review._id)} className="btn btn-danger">Delete</button>
-										}
-										/>
-									</li>
-								))}
-							</ul> : <h4>Be the first to review!</h4>}
+									{reviews.map((review) => (
+										<li className="list-group-item d-flex justify-content-between align-items-center">
+											<div>
+												<h2>
+													<Link to={`/profile-view/${review.userID}`} className="text-primary">
+														{review && review.username}
+													</Link>
+												</h2>
+												<p>"{review.text}"</p>
+											</div>
+											{/* Show delete button only if user is the author of the review */}
+											{curSessionUser && review.userID === curSessionUser._id &&
+												<button onClick={() => deleteReview(review._id)} className="btn btn-danger">Delete</button>
+											}
+											<SellerContext sellercontent={
+												<button onClick={() => deleteReview(review._id)} className="btn btn-danger">Delete</button>
+											}
+											/>
+										</li>
+									))}
+								</ul> : <h4>Be the first to review!</h4>}
 						</div>
 					</div>
 				</div>
