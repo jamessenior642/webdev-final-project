@@ -110,9 +110,12 @@ const deleteReview = async (reviewId) => {
 									<li className="list-group-item d-flex justify-content-between align-items-center">
 										<div>
 											<h2>
-												<Link to={`/profile-view/${review.userID}`} className="text-primary">
-													{review && review.username}
-												</Link> 
+											<Link 
+  to={curSessionUser && review.userID === curSessionUser._id ? "/profile" : `/profile-view/${review.userID}`} 
+  className="text-primary"
+>
+  {review && review.username}
+</Link>
 											</h2>
 											<p>"{review.text}"</p>
 										</div>

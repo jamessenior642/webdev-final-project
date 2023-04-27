@@ -12,7 +12,6 @@ const Profile = () => {
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
   const [err, setError] = React.useState(false);
-  
   const userID = profile._id;
   const [reviews, setReviews] = useState([]);
   const [products, setProducts] = useState([]);
